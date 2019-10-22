@@ -1,5 +1,5 @@
 //导入{}中定义的变量
-import {flag, sum} from "./a.js"
+import { flag, sum } from "./a.js"
 
 if (flag) {
   console.log("纯纯粹粹")
@@ -7,14 +7,14 @@ if (flag) {
 }
 
 //导出export定义的变量
-import {num, height} from "./a.js"
+import { num, height } from "./a.js"
 
 console.log(num)
 console.log(height)
 
 
 //导入export的function
-import {mul, Person} from "./a.js"
+import { mul, Person } from "./a.js"
 
 console.log(mul(1, 2))
 

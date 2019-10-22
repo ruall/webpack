@@ -35,6 +35,6 @@ export class Person {
 const address = '广州市'
 // export default address
 
-export default function(e){
+export default function (e) {
   console.log(e)
 }
