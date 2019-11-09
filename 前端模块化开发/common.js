@@ -1,7 +1,7 @@
 //CommonJS的导出
 module.exports = {
   flag: true,
-  fun() {
+  fun () {
     return 'aaa'
   },
 }
