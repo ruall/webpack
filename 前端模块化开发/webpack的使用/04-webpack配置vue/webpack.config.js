@@ -1,10 +1,10 @@
-const path = require('path')
+const path = require("path")
 module.exports = {
-  entry: './src/main.js',
+  entry: "./src/main.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: 'dist/'
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+    publicPath: "dist/"
   },
   module: {
     rules: [
@@ -13,7 +13,7 @@ module.exports = {
         // css-loader 只负责把css文件进行加载
         // style-loader 负责将样式加载到dom中
         // 使用多个loader时，从右向左顺序
-        use: ['style-loader', 'css-loader']
+        use: ["style-loader", "css-loader"]
       },
       {
         test: /\.less$/,
@@ -29,12 +29,12 @@ module.exports = {
         test: /\.(png|jpg|gif|jpeg)$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: "url-loader",
             options: {
               //当加载的图片小于limit时，会将图片编译成base64格式的字符串
               //当加载的图片大于limit时，需要使用file-loader模块进行加载
               limit: 1100,
-              name: 'img/[name].[hash:8].[ext]'
+              name: "img/[name].[hash:8].[ext]"
             }
           }
         ]
@@ -43,12 +43,17 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['es2015']
+            presets: ["es2015"]
           }
         }
       }
     ]
+  },
+  resolve: {
+    alias: {
+      "vue$": "vue/dist/vue.esm.js"
+    }
   }
 }

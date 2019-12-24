@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "dist/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 2);
@@ -449,11 +449,13 @@ module.exports = function (list, options) {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_info__ = __webpack_require__(4);
+
+
+var _info = __webpack_require__(3);
+
 /*
  * @Descripttion: 使用commonJs的模块化规范
  * @Author: ling
@@ -461,10 +463,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * @LastEditors: ling
  * @LastEditTime: 2019-11-26 16:39:58
  */
-const { add, mul } = __webpack_require__(3)
+var _require = __webpack_require__(4),
+    add = _require.add,
+    mul = _require.mul;
 
-console.log(add(10, 20))
-console.log(mul(10, 20))
+console.log(add(10, 20));
+console.log(mul(10, 20));
 
 /*
  * @Descripttion: 使用ES6的模块化规范
@@ -474,21 +478,44 @@ console.log(mul(10, 20))
  * @LastEditTime: 2019-11-26 16:36:23
  */
 
-console.log(`${__WEBPACK_IMPORTED_MODULE_0__js_info__["c" /* name */]}-${__WEBPACK_IMPORTED_MODULE_0__js_info__["a" /* age */]}-${__WEBPACK_IMPORTED_MODULE_0__js_info__["b" /* height */]}`);
-
+console.log(_info.name + '-' + _info.age + '-' + _info.height);
 
 /**
  * 依赖css文件
  * */
-__webpack_require__(5)
+__webpack_require__(5);
 
-__webpack_require__(7)
+__webpack_require__(9);
 
-document.writeln("<h2>webpack配置</h2>")
+document.writeln("<h2>webpack配置</h2>");
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/*
+ * @Descripttion: ES6模块化开发
+ * @Author: ling
+ * @Date: 2019-11-26 16:36:59
+ * @LastEditors: ling
+ * @LastEditTime: 2019-11-26 16:38:14
+ */
+var name = exports.name = 'andy';
+var age = exports.age = 18;
+var height = exports.height = 2.0;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /*
  * @Descripttion: 模块化开发demo
@@ -497,40 +524,18 @@ document.writeln("<h2>webpack配置</h2>")
  * @LastEditors: ling
  * @LastEditTime: 2019-11-26 16:27:54
  */
-function add (num1, num2) {
-  return num1 + num2
+function add(num1, num2) {
+  return num1 + num2;
 }
 
-function mul (num1, num2) {
-  return num1 * num2
+function mul(num1, num2) {
+  return num1 * num2;
 }
 
 module.exports = {
-  add,
-  mul
-}
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/*
- * @Descripttion: ES6模块化开发
- * @Author: ling
- * @Date: 2019-11-26 16:36:59
- * @LastEditors: ling
- * @LastEditTime: 2019-11-26 16:38:14
- */
-const name = 'andy'
-/* harmony export (immutable) */ __webpack_exports__["c"] = name;
-
-const age = 18
-/* harmony export (immutable) */ __webpack_exports__["a"] = age;
-
-const height = 2.0
-/* harmony export (immutable) */ __webpack_exports__["b"] = height;
-
+  add: add,
+  mul: mul
+};
 
 /***/ }),
 /* 5 */
@@ -559,15 +564,66 @@ if (content.locals) {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
+// Imports
+var getUrl = __webpack_require__(7);
+var ___CSS_LOADER_URL___0___ = getUrl(__webpack_require__(8));
 // Module
-exports.push([module.i, "body{\n    background-color: red;\n}", ""]);
+exports.push([module.i, "body{\n  /*background-color: red;*/\n  background: url(" + ___CSS_LOADER_URL___0___ + ");\n}", ""]);
 
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var content = __webpack_require__(8);
+"use strict";
+
+
+module.exports = function (url, options) {
+  if (!options) {
+    // eslint-disable-next-line no-param-reassign
+    options = {};
+  } // eslint-disable-next-line no-underscore-dangle, no-param-reassign
+
+
+  url = url.__esModule ? url.default : url;
+
+  if (typeof url !== 'string') {
+    return url;
+  } // If url is already wrapped in quotes, remove them
+
+
+  if (/^['"].*['"]$/.test(url)) {
+    // eslint-disable-next-line no-param-reassign
+    url = url.slice(1, -1);
+  }
+
+  if (options.hash) {
+    // eslint-disable-next-line no-param-reassign
+    url += options.hash;
+  } // Should url be wrapped?
+  // See https://drafts.csswg.org/css-values-3/#urls
+
+
+  if (/["'() \t\n]/.test(url) || options.needQuotes) {
+    return "\"".concat(url.replace(/"/g, '\\"').replace(/\n/g, '\\n'), "\"");
+  }
+
+  return url;
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "img/wechat.03e48e93.png");
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var content = __webpack_require__(10);
 
 if (typeof content === 'string') {
   content = [[module.i, content, '']];
@@ -586,7 +642,7 @@ if (content.locals) {
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
