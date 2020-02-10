@@ -2,19 +2,17 @@ const path = require("path")
 const webpack = require("webpack")
 const VueLoaderPlugin = require("vue-loader/lib/plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const uglifyJsPlugin = require("uglifyjs-webpack-plugin")
 module.exports = {
   plugins: [
     new webpack.BannerPlugin("最终版权归某某某所有"),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: "index.html"
-    }),
-    new uglifyJsPlugin()
+    })
   ],
   entry: "./src/main.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "../dist"),
     filename: "bundle.js",
     // publicPath: "dist/"
   },
@@ -74,10 +72,5 @@ module.exports = {
     alias: {
       "vue$": "vue/dist/vue.esm.js"
     }
-  },
-  devServer: {
-    contentBase: "./dist",
-    inline: true,
-    port: "8088"
   }
 }
