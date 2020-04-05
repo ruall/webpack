@@ -6,7 +6,10 @@
     <router-link :to="'/about/'+userInfo" tag="button" replace>关于</router-link>
 <!--    <button @click="homeClick()">首页</button>-->
 <!--    <button @click="aboutClick()">关于</button>-->
-    <router-view></router-view>
+    <router-link :to="{path:'/prolife',query:{name:'ant',sex:'1',age:'18'}}" tag="button">档案</router-link>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -15,7 +18,7 @@ export default {
   name: 'App',
   data(){
     return{
-      userInfo:'aaa'
+      userInfo:'aaa',
     }
   },
   methods:{
@@ -26,7 +29,7 @@ export default {
     aboutClick(){
       // this.$router.push('about')
       this.$router.replace('about')
-    }
+    },
   }
 }
 </script>
